@@ -11,6 +11,8 @@
 
 package assignment1;
 
+import java.util.Arrays;
+
 public class SortTools {
     /**
      * This method tests to see if the given array is sorted.
@@ -20,9 +22,31 @@ public class SortTools {
      * @return true if array is sorted
      */
     public static boolean isSorted(int[] x, int n) {
-        // stub only, you write this!
-        // TODO: complete it
-        return false;
+
+        if (x.length == 0 || n == 0)
+            return false;
+
+        for (int i = 0; i < n - 1; i++) {
+            if (x[i] > x[i + 1])
+                return false;
+        }
+
+        return true;
+    }
+
+    private static int binary_find(int[] x, int low, int high, int v) {
+        if (low < high) {
+            int mid = (low + high) / 2;
+
+            if (v < x[mid]) {
+                return binary_find(x, low, mid, v);
+            } else if (v > x[mid]) {
+                return binary_find(x, mid + 1, high, v);
+            } else {
+                return mid;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -36,7 +60,8 @@ public class SortTools {
     public static int find(int[] x, int n, int v) {
         // stub only, you write this!
         // TODO: complete it
-        return -1;
+
+        return binary_find(x, 0, n, v);
     }
 
     /**
@@ -50,7 +75,32 @@ public class SortTools {
     public static int[] insertGeneral(int[] x, int n, int v) {
         // stub only, you write this!
         // TODO: complete it
-        return null;
+
+        int found_place = find(x, n, v);
+
+        if (found_place > -1) {
+            return Arrays.copyOf(x, n);
+        } else {
+            int[] new_array = new int[n + 1];
+
+            int i;
+
+            for (i = 0; i < n; i++) {
+                if (v > x[i])
+                    new_array[i] = x[i];
+                else
+                    break;
+            }
+
+            new_array[i] = v;
+
+
+            for (int j = i; j < n; j++) {
+                new_array[j + 1] = x[j];
+            }
+
+            return new_array;
+        }
     }
 
     /**
@@ -64,6 +114,23 @@ public class SortTools {
     public static int insertInPlace(int[] x, int n, int v) {
         // stub only, you write this!
         // TODO: complete it
+
+        int found_place = find(x, n, v);
+
+        if (found_place > -1) {
+            return n;
+        } else {
+            int i;
+
+            for (i = 0; i < n; i++) {
+                if (v > x[i])
+                    break;
+
+            }
+
+            x[i + 1] = v;
+        }
+
         return -1;
     }
 
