@@ -123,12 +123,12 @@ public class SortTools {
             int i;
 
             for (i = 0; i < n; i++) {
-                if (v > x[i])
+                if (v < x[i])
                     break;
 
             }
 
-            x[i + 1] = v;
+            x[i] = v;
         }
 
         return -1;
@@ -141,5 +141,23 @@ public class SortTools {
      * @param n is the number of elements of the array to be sorted
      */
     public static void insertSort(int[] x, int n) {
+
+        // Loops through each item in the list
+        for (int i = 1; i < n; i++) {
+
+            // selects a focus to compare to range below focus value
+            int focus = x[i];
+
+            // set range of comparable values to all values before focus variable
+            int j = i - 1;
+
+            // loops while not at the beginning of the array and the focus is less than then current comparator
+            while ((j > -1) && (focus < x[j])) {
+                x[j + 1] = x[j]; // moves current item into next slot in the array (spot is freed up by focus being saved)
+                j--;
+            }
+
+            x[j + 1] = focus; // finally slots focus back into array before all items that are greater than it
+        }
     }
 }
