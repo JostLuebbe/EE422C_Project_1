@@ -58,8 +58,6 @@ public class SortTools {
      * @return index of v if v is contained within x. -1 if v is not contained within x
      */
     public static int find(int[] x, int n, int v) {
-        // stub only, you write this!
-        // TODO: complete it
 
         return binary_find(x, 0, n, v);
     }
@@ -73,12 +71,10 @@ public class SortTools {
      * @return a new array containing the first n elements of x, and v
      */
     public static int[] insertGeneral(int[] x, int n, int v) {
-        // stub only, you write this!
-        // TODO: complete it
 
         int found_place = find(x, n, v);
 
-        if (found_place > -1) {
+        if (found_place != -1) {
             return Arrays.copyOf(x, n);
         } else {
             int[] new_array = new int[n + 1];
@@ -93,7 +89,6 @@ public class SortTools {
             }
 
             new_array[i] = v;
-
 
             for (int j = i; j < n; j++) {
                 new_array[j + 1] = x[j];
@@ -112,12 +107,10 @@ public class SortTools {
      * @return n if v is already in x, otherwise returns n+1
      */
     public static int insertInPlace(int[] x, int n, int v) {
-        // stub only, you write this!
-        // TODO: complete it
 
         int found_place = find(x, n, v);
 
-        if (found_place > -1) {
+        if (found_place != -1) {
             return n;
         } else {
             int i;
@@ -125,13 +118,12 @@ public class SortTools {
             for (i = 0; i < n; i++) {
                 if (v < x[i])
                     break;
-
             }
 
             x[i] = v;
         }
 
-        return -1;
+        return n + 1;
     }
 
     /**
